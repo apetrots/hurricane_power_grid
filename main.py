@@ -24,8 +24,15 @@ def main():
     path_count = 20;
     time_step_count = 6
     time_step_duration = 2 # in hours
+    sample_size = 5 # equivalent to N_0 in paper
 
-    print(calculate_path_points( [0.0, 0.0], 5.0, normalized([0.0, 1.0]), time_step_count))
+    path = calculate_path_points( [0.0, 0.0], 5.0, normalized([0.0, 1.0]), time_step_count)
+    # "Simulate N_0 hurricanes at landfall"
+    for hurr_idx in range(sample_size):
+        for _ in range(sample_size):
+            land_decay_factor = np.random.lognormal(mean=-3.466, sigma=0.703, size=None) # "Take N_0 samples of a lognormal PDF with parameters to simulate the land decay factor"
+
+
 
     print("Hello World!")
 
