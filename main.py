@@ -1,8 +1,10 @@
+
+
 import numpy as np
 from scipy import stats
 import math
 import matplotlib.pyplot as plt
-
+import seaborn
 class Hurricane:
     def simulate(self, point):
         K = 1.14 # Some constant > 1; closer to 1 = more conservative estimates of the speeds
@@ -30,14 +32,11 @@ def main():
     time_step_count = 6
     time_step_duration = 2 # in hours
     sample_size = 5 # equivalent to N_0 in paper, set to predetermined 7000, some method could be used to find optimal value, but outside of scope
-    test_data = [0, 0, 0.006, 0.001, 0.001, 0.002, 0.01, 0.004, 0.005, 0.004, 0.004, 0.004, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-    affected_radius_kde = stats.gaussian_kde(test_data)
-    
-    test_x = np.linspace(0.0, 0.01)
-    plt.plot(test_x, affected_radius_kde.pdf(test_x))
+    test_data=[400, 375, 350, 350, 325, 325, 325, 300, 300, 300, 300, 275, 275, 275, 250, 250, 250, 250, 225, 225, 200, 175, 150, 150, 125]
+    seaborn.kdeplot(data=test_data, bw_adjust=0.65)
 
     plt.show()
-    print(affected_radius_kde.resample(path_count * time_step_count))
+    #print(affected_radius_kde.resample(path_count * time_step_count))
 
     # "Simulate N_0 hurricanes at landfall"
     for scenario in range(sample_size):
